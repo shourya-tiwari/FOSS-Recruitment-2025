@@ -1,82 +1,128 @@
-# Project Title: Write your project name here
+Got it 🚀 I’ll fill your README for the **Expense Tracker (CSV-based GUI app)** in the exact same structure you shared.
+Here’s a polished draft for you:
+
+---
+
+````markdown
+# Project Title: Personal Expense Tracker  
 
 ## Student Details
-- **Name**: Shourya Tiwari 
+- **Name**: Shourya Tiwari  
 - **PRN**: 24070126169  
-- **Year**: SY   
+- **Year**: SY  
 - **Branch**: AIML  
 
 ---
 
 ## Problem Statement
-Write in 2–3 lines what problem your project solves.  
-Example: "Students often forget their daily timetable. This project shows today's timetable in one click."
+Managing personal expenses manually often leads to errors or forgotten entries.  
+This project provides a simple GUI-based application that allows students and professionals to record, view, and analyze their expenses in one place.
 
 ---
 
 ## Features
-List the main things your project can do.  
-Example:  
-- Show today's timetable  
-- Remind with notifications  
-- Works offline 
+- Add new expenses with amount and category  
+- View a list of all saved expenses  
+- Delete unwanted expenses  
+- View a category-wise summary of total spending  
+- Visualize expenses using a pie chart  
+- Data stored in a CSV file (persistent between runs)  
+- Simple and beginner-friendly Tkinter GUI  
 
 ---
 
 ## Tech Stack
-List the tools or languages you used.  
-Example: Python, HTML, CSS, JavaScript, Arduino, etc.
+- **Python**  
+- **Tkinter (for GUI)**  
+- **CSV (for data persistence)**  
+- **Matplotlib (for charts)**  
 
 ---
 
 ## How to Run
-Explain step by step how to run your project.  
-Example:  
-1. Open the folder in VS Code.  
-2. Run `python main.py`  
-3. The program will start in offline mode.
+1. Clone the repository.  
+   ```bash
+   git clone https://github.com/<your-username>/FOSS-Recruitment-2025.git
+````
+
+2. Open the project folder in VS Code (or any IDE).
+3. Make sure you have Python installed.
+4. Install dependencies if required:
+
+   ```bash
+   pip install matplotlib
+   ```
+5. Run the program:
+
+   ```bash
+   python main.py
+   ```
+6. The GUI will open and you can start adding expenses.
 
 ---
 
 ## Project Structure
 
-your-project/ ├── README.md ├── src/        # your code ├── docs/       # (optional) documentation └── sample_output/   # (optional) if you use APIs
+```
+FOSS-Recruitment-2025/
+├── main.py              # Main GUI code
+├── expenses.csv         # Data storage (auto-created on first run)
+├── README.md            # Documentation
+└── sample_output/       # (optional) screenshots or terminal output
+```
 
 ---
 
 ## Demo Screenshot / Output
-Add a screenshot of your project running, or copy-paste sample terminal output here.
+
+**Sample GUI Output:**
+![Expense Tracker GUI](image.png)
+
+Example:
+
+```
+Added: 200 - Food
+Added: 500 - Transport
+Summary:
+Food: 200
+Transport: 500
+```
 
 ---
 
 ## AI Tools Used
-List any AI tools you used (if any).  
-Example: ChatGPT, GitHub Copilot, Cursor, Gemini, etc.  
-If not used, write "None".
+
+* ChatGPT (for brainstorming project structure and explanations)
 
 ---
 
 ## Future Improvements
-Write how you would improve this project if you had more time.  
-Example: Add more features, make a better design, connect to API, etc.
 
+* Add date & description fields for each expense
+* Export data to Excel format for advanced tracking
+* Add monthly & yearly expense filters
+* Improve UI design with modern themes
+* Add notifications/reminders for budget limits
 
 ---
 
 ## Notes for Reviewers
-Any extra note for the FOSS team.  
-Example: "This project runs offline by default." or "Needs an internet connection."
+
+This project runs **offline** and stores data locally in a CSV file.
+It is lightweight, requires no API, and works with just Python installed.
 
 ---
 
-## Submission Checklist 
-- [x] Cloned the Repository 
-- [ ] Added my details (Name, PRN, Year, Branch)  
-- [ ] Wrote Problem Statement  
-- [ ] Listed Features & Tech Stack  
-- [ ] Added clear Run Instructions  
-- [ ] Provided Demo Output (screenshot or text)  
-- [ ] Listed AI tools used (or None)  
-- [ ] Explained Future Improvements  
-- [ ] Project runs offline
+## Submission Checklist
 
+* [x] Cloned the Repository
+* [x] Added my details (Name, PRN, Year, Branch)
+* [x] Wrote Problem Statement
+* [x] Listed Features & Tech Stack
+* [x] Added clear Run Instructions
+* [x] Provided Demo Output (screenshot or text)
+* [x] Listed AI tools used (or None)
+* [x] Explained Future Improvements
+* [x] Project runs offline
+
+```
