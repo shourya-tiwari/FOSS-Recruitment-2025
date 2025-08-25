@@ -3,6 +3,7 @@ import json
 import os
 from collections import defaultdict
 from tkinter import messagebox
+import matplotlib.pyplot as plt
 
 FILE = "expenses.json"
 expenses = []
@@ -64,9 +65,22 @@ def delete_expense():
     view_expenses()
     status_label.config(text=f"🗑️ Removed {removed['category']} - ₹{removed['amount']}")
 
+def show_chart():
+    if not expenses:
+        messagebox.showinfo("Chart", "No data available.")
+        return
+
+    categories = defaultdict(float)
+    for exp in expenses:
+        categories[exp["category"]] += exp["amount"]
+
+    plt.pie(categories.values(), labels=categories.keys(), autopct="%1.1f%%")
+    plt.title("Spending by Category")
+    plt.show()
+
 root = tk.Tk()
 root.title("Expense Tracker")
-root.geometry("400x550")
+root.geometry("400x600")
 
 tk.Label(root, text="Amount (₹):").pack()
 amount_entry = tk.Entry(root)
@@ -80,6 +94,7 @@ tk.Button(root, text="Add Expense", command=add_expense).pack(pady=10)
 tk.Button(root, text="View Expenses", command=view_expenses).pack(pady=10)
 tk.Button(root, text="Show Summary", command=show_summary).pack(pady=10)
 tk.Button(root, text="Delete Selected", command=delete_expense).pack(pady=10)
+tk.Button(root, text="Show Chart", command=show_chart).pack(pady=10)
 
 expense_list = tk.Listbox(root, width=40, height=8)
 expense_list.pack()
