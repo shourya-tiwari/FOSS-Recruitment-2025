@@ -53,9 +53,20 @@ def show_summary():
 
     messagebox.showinfo("Expense Summary", summary_text)
 
+def delete_expense():
+    selected = expense_list.curselection()
+    if not selected:
+        status_label.config(text="⚠️ Select an expense to delete!")
+        return
+    idx = selected[0]
+    removed = expenses.pop(idx)
+    save_expenses()
+    view_expenses()
+    status_label.config(text=f"🗑️ Removed {removed['category']} - ₹{removed['amount']}")
+
 root = tk.Tk()
 root.title("Expense Tracker")
-root.geometry("400x500")
+root.geometry("400x550")
 
 tk.Label(root, text="Amount (₹):").pack()
 amount_entry = tk.Entry(root)
@@ -68,6 +79,7 @@ category_entry.pack()
 tk.Button(root, text="Add Expense", command=add_expense).pack(pady=10)
 tk.Button(root, text="View Expenses", command=view_expenses).pack(pady=10)
 tk.Button(root, text="Show Summary", command=show_summary).pack(pady=10)
+tk.Button(root, text="Delete Selected", command=delete_expense).pack(pady=10)
 
 expense_list = tk.Listbox(root, width=40, height=8)
 expense_list.pack()
