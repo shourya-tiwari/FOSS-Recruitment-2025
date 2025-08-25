@@ -1,43 +1,43 @@
-import csv
 import tkinter as tk
+import json
+import os
 
-FILE_NAME = "expenses.csv"
+FILE = "expenses.json"
 expenses = []
 
 def load_expenses():
-    try:
-        with open(FILE_NAME, newline="") as file:
-            reader = csv.DictReader(file)
-            return [{"amount": float(row["amount"]), "category": row["category"]} for row in reader]
-    except FileNotFoundError:
-        return []
+    global expenses
+    if os.path.exists(FILE):
+        with open(FILE, "r") as f:
+            expenses = json.load(f)
 
 def save_expenses():
-    with open(FILE_NAME, "w", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=["amount", "category"])
-        writer.writeheader()
-        writer.writerows(expenses)
+    with open(FILE, "w") as f:
+        json.dump(expenses, f)
 
 def add_expense():
-    amount = amount_entry.get()
-    category = category_entry.get()
-    
-    if amount and category:
-        expenses.append({"amount": float(amount), "category": category})
+    try:
+        amount = float(amount_entry.get())
+        category = category_entry.get()
+        expenses.append({"amount": amount, "category": category})
         save_expenses()
-        status_label.config(text=f"✅ Added: ₹{amount} ({category})")
+        view_expenses()
+        status_label.config(text=f"✅ Added {category}: ₹{amount}")
         amount_entry.delete(0, tk.END)
         category_entry.delete(0, tk.END)
-    else:
-        status_label.config(text="⚠️ Please fill all fields!")
+    except ValueError:
+        status_label.config(text="⚠️ Enter a valid amount!")
+
+def view_expenses():
+    expense_list.delete(0, tk.END)
+    for exp in expenses:
+        expense_list.insert(tk.END, f"₹{exp['amount']} - {exp['category']}")
 
 root = tk.Tk()
-root.title("Expense Tracker 💰")
-root.geometry("400x300")
+root.title("Expense Tracker")
+root.geometry("400x500")
 
-expenses = load_expenses()
-
-tk.Label(root, text="Amount:").pack()
+tk.Label(root, text="Amount (₹):").pack()
 amount_entry = tk.Entry(root)
 amount_entry.pack()
 
@@ -46,8 +46,15 @@ category_entry = tk.Entry(root)
 category_entry.pack()
 
 tk.Button(root, text="Add Expense", command=add_expense).pack(pady=10)
+tk.Button(root, text="View Expenses", command=view_expenses).pack(pady=10)
 
-status_label = tk.Label(root, text="")
-status_label.pack()
+expense_list = tk.Listbox(root, width=40, height=8)
+expense_list.pack()
+
+status_label = tk.Label(root, text="Ready", fg="blue")
+status_label.pack(pady=10)
+
+load_expenses()
+view_expenses()
 
 root.mainloop()
