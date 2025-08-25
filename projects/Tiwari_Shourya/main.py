@@ -1,6 +1,8 @@
 import tkinter as tk
 import json
 import os
+from collections import defaultdict
+from tkinter import messagebox
 
 FILE = "expenses.json"
 expenses = []
@@ -33,6 +35,24 @@ def view_expenses():
     for exp in expenses:
         expense_list.insert(tk.END, f"₹{exp['amount']} - {exp['category']}")
 
+def show_summary():
+    if not expenses:
+        messagebox.showinfo("Summary", "No expenses recorded yet.")
+        return
+
+    total = sum(exp["amount"] for exp in expenses)
+    summary_text = f"💡 Total Spent: ₹{total}\n\n"
+
+    categories = defaultdict(float)
+    for exp in expenses:
+        categories[exp["category"]] += exp["amount"]
+
+    summary_text += "📊 Spending by Category:\n"
+    for cat, amt in categories.items():
+        summary_text += f"{cat}: ₹{amt}\n"
+
+    messagebox.showinfo("Expense Summary", summary_text)
+
 root = tk.Tk()
 root.title("Expense Tracker")
 root.geometry("400x500")
@@ -47,6 +67,7 @@ category_entry.pack()
 
 tk.Button(root, text="Add Expense", command=add_expense).pack(pady=10)
 tk.Button(root, text="View Expenses", command=view_expenses).pack(pady=10)
+tk.Button(root, text="Show Summary", command=show_summary).pack(pady=10)
 
 expense_list = tk.Listbox(root, width=40, height=8)
 expense_list.pack()
